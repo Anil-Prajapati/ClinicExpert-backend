@@ -5,6 +5,7 @@ import com.clinic.Service.DoctorService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,4 +36,24 @@ public class DoctorController {
     public List<Doctor> doctorList(){
         return doctorService.getDoctorList();
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/update/{id}")
+    public Doctor updateDoctor(@PathVariable UUID id, @RequestBody Doctor doctor){
+        return doctorService.updateDoctor(id, doctor);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{id}")
+    public void deleteDoctor(@PathVariable UUID id){
+        doctorService.deleteDoctor(id);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/add/doctor")
+    public Doctor createDoctor(@RequestBody Doctor doctor){
+        return doctorService.createDoctor(doctor);
+    }
+
+
 }

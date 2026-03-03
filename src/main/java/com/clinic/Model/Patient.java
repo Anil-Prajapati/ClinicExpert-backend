@@ -1,6 +1,7 @@
 package com.clinic.Model;
 
 import com.clinic.Enums.ClinicStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,12 +34,14 @@ public class Patient {
     @Hidden
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clinic_id", nullable = false)
+    @JsonIgnore
     private Clinic clinic;
 
     // ===== Doctor Mapping (optional) =====
     @Hidden
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id")
+    @JsonIgnore
     private Doctor doctor;
 
     // ===== Personal Info =====
@@ -105,6 +108,7 @@ public class Patient {
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "role_name")
     )
+    @JsonIgnore
     private Set<Roles> roles;
 
     // ===== Audit =====

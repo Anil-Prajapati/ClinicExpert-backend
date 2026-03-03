@@ -136,6 +136,7 @@ public class JwtService implements UserDetailsService {
 
     private RootPostResponse handleDoctorLogin(Doctor doctor, String password) {
 
+        authenticate(doctor.getDoctorEmail(), password);
         UserDetails userDetails = loadUserByUsername(doctor.getDoctorEmail());
         String token = jwtUtil.generateToken(userDetails);
         String roleName = doctor.getRoles().isEmpty() ? "DOCTOR" : doctor.getRoles().iterator().next().getRoleName();

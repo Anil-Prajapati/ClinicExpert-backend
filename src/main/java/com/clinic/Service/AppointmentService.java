@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -29,5 +31,9 @@ public class AppointmentService {
         notificationRepository.save(notification);
         realTimeNotificationService.sendNotification(savedAppointment.getDoctorId(), notification.getMessage());
         return savedAppointment;
+    }
+
+    public List<Appointment> findAllAppointment(){
+        return appointmentRepository.findAll();
     }
 }

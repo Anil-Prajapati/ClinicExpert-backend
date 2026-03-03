@@ -52,4 +52,30 @@ public class DoctorService {
     public List<Doctor> getDoctorList(){
         return doctorRepository.findAll();
     }
+
+
+    public void deleteDoctor(UUID id){
+        doctorRepository.deleteById(id);
+    }
+
+    public Doctor createDoctor(Doctor doctor){
+        return doctorRepository.save(doctor);
+    }
+
+
+    public Doctor updateDoctor(UUID id, Doctor doctor) {
+        return doctorRepository.findById(id).map(existingDoctor -> {
+            existingDoctor.setFullName(doctor.getFullName());
+            existingDoctor.setDoctorSpecialization(doctor.getDoctorSpecialization());
+            existingDoctor.setDoctorContact(doctor.getDoctorContact());
+            existingDoctor.setDoctorEmail(doctor.getDoctorEmail());
+            existingDoctor.setDoctorQualification(doctor.getDoctorQualification());
+            existingDoctor.setDoctorExperience(doctor.getDoctorExperience());
+            existingDoctor.setDoctorAvailableFrom(doctor.getDoctorAvailableFrom());
+            existingDoctor.setDoctorAvailableTo(doctor.getDoctorAvailableTo());
+            existingDoctor.setStatus(doctor.getStatus());
+            existingDoctor.setUpdateAt(java.time.LocalDateTime.now());
+            return doctorRepository.save(existingDoctor);
+        }).orElseThrow(() -> new RuntimeException("Doctor not found with id: " + id));
+    }
 }
