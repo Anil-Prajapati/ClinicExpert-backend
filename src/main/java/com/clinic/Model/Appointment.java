@@ -2,6 +2,8 @@ package com.clinic.Model;
 
 import com.clinic.Enums.AppointmentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -35,12 +37,6 @@ public class Appointment {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "clinic_id")
-    private String clinicId;
-
-    @Column(name = "doctor_id")
-    private String doctorId;
-
     @Column(name = "appointment_date")
     private LocalDate appointmentDate;
 
@@ -55,4 +51,20 @@ public class Appointment {
     @Column(name = "patient_status")
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status = AppointmentStatus.PENDING;
+
+   // ===== Patient Mapping =====
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "patient_id", nullable = false)
+   private Patient patient;
+
+    // ===== Doctor Mapping =====
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctor_id", nullable = false)
+    private Doctor doctor;
+
+    // ===== Clinic Mapping =====
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clinic_id", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Clinic clinic;
 }

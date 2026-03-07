@@ -1,6 +1,7 @@
 package com.clinic.Controller;
 
 import com.clinic.LookupResponse.RootPostResponse;
+import com.clinic.Model.Clinic;
 import com.clinic.Request.ForgetPasswordRequest;
 import com.clinic.Request.JwtRequest;
 import com.clinic.Request.ResetPasswordRequest;
@@ -10,9 +11,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -56,4 +60,7 @@ public class ClinicLogin {
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok("Authentication service is running");
     }
+
+
+
 }

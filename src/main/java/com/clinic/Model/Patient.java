@@ -30,20 +30,6 @@ public class Patient {
     @Hidden
     private UUID patientId;
 
-    // ===== Clinic Mapping =====
-    @Hidden
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clinic_id", nullable = false)
-    @JsonIgnore
-    private Clinic clinic;
-
-    // ===== Doctor Mapping (optional) =====
-    @Hidden
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctor_id")
-    @JsonIgnore
-    private Doctor doctor;
-
     // ===== Personal Info =====
     @Column(name = "full_name", nullable = false)
     private String fullName;
@@ -110,6 +96,25 @@ public class Patient {
     )
     @JsonIgnore
     private Set<Roles> roles;
+
+    // ===== Clinic Mapping =====
+    @Hidden
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clinic_id", nullable = false)
+    @JsonIgnore
+    private Clinic clinic;
+
+    // ===== Doctor Mapping (optional) =====
+    @Hidden
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctor_id")
+    @JsonIgnore
+    private Doctor doctor;
+
+    // ===== Appointment Relationship =====
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Appointment> appointments;
 
     // ===== Audit =====
 

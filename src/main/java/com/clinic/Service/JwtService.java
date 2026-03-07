@@ -32,6 +32,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -176,9 +177,11 @@ public class JwtService implements UserDetailsService {
         UserDetails userDetails = loadUserByUsername(patient.getPatientEmail());
         String token = jwtUtil.generateToken(userDetails);
         String roleName = patient.getRoles().isEmpty() ? "PATIENT" : patient.getRoles().iterator().next().getRoleName();
+        UUID clinicId = patient.getClinic() != null ? patient.getClinic().getClinicId() : null;
         ResponseIdentifier identifier =
                 ResponseIdentifier.forPatient(
                         patient.getPatientId(),
+                        clinicId,
                         patient.getFullName(),
                         token
                 );

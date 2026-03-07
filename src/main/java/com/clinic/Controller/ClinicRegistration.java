@@ -1,14 +1,18 @@
 package com.clinic.Controller;
 
 
+import com.clinic.LookupResponse.ResponseIdentifier;
 import com.clinic.LookupResponse.RootPostResponse;
 import com.clinic.Model.Clinic;
 import com.clinic.Request.ClinicContactRequest;
 import com.clinic.Service.RegistrationService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -28,5 +32,10 @@ public class ClinicRegistration {
     @PreAuthorize("hasRole('ADMIN')")
     public RootPostResponse getClinicInformation(@RequestBody ClinicContactRequest clinicContact){
         return registrationService.GetClinicInfo(clinicContact);
+    }
+
+    @GetMapping("/all/clinic")
+    public List<ResponseIdentifier> findAllClinics(){
+        return registrationService.getAllClinic();
     }
 }

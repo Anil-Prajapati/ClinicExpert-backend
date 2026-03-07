@@ -55,11 +55,13 @@ public class ResponseIdentifier {
 
     public static ResponseIdentifier forPatient(
             UUID patientId,
+            UUID clinicId,
             String patientName,
             String token
     ) {
         ResponseIdentifier r = new ResponseIdentifier();
         r.setPatient_id(patientId);
+        r.setClinic_id(clinicId);
         r.setPatient_name(patientName);
         r.setToken(token);
         return r;

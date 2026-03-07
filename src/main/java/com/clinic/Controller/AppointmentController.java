@@ -23,7 +23,7 @@ public class AppointmentController {
         return appointmentService.bookAppointment(appointment);
     }
 
-    @PreAuthorize("hasRole('DOCTOR') or hasRole('ADMIN') or hasRole('PATIENT') or hasRole('DOCTOR')")
+    @PreAuthorize("hasRole('DOCTOR') or hasRole('ADMIN') or hasRole('PATIENT')")
     @GetMapping("/all/appointment")
     public List<Appointment> findAllAppointment(){
         return appointmentService.findAllAppointment();

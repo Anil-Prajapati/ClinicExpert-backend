@@ -49,11 +49,5 @@ public class DoctorController {
         doctorService.deleteDoctor(id);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/add/doctor")
-    public Doctor createDoctor(@RequestBody Doctor doctor){
-        return doctorService.createDoctor(doctor);
-    }
-
 
 }
