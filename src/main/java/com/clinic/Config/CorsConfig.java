@@ -13,7 +13,8 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "http://localhost:4200",
                         "https://anil-prajapati.github.io",
-                        "https://clinicexpert-backend.onrender.com"
+                        "https://clinicexpert-backend.onrender.com",
+                        "https://clinicexpertprojects.anilprajapati80814895.workers.dev"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
